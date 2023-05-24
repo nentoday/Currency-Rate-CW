@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CurrencyService {
     List <CurrencyDto> findAllCurrencies();
-    Currency saveCurrency(Currency currency);
+    Currency saveCurrency(CurrencyDto currencyDto);
 
     CurrencyDto findByClubId(long currencyId);
 

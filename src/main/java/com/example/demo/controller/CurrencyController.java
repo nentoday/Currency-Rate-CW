@@ -3,9 +3,11 @@ package com.example.demo.controller;
 import com.example.demo.dto.CurrencyDto;
 import com.example.demo.model.Currency;
 import com.example.demo.services.CurrencyService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,8 +38,13 @@ public class CurrencyController {
 
     }
     @PostMapping("/currency/new")
-    public String saveCurrency(@ModelAttribute("currency") Currency currency){
-        currencyService.saveCurrency(currency);
+    public String saveCurrency(@Valid @ModelAttribute("currency") CurrencyDto currencyDto,
+                               BindingResult result, Model model){
+        if(result.hasErrors()){
+            model.addAttribute("currency", currencyDto);
+            return "currency-create";
+        }
+        currencyService.saveCurrency(currencyDto);
         return "redirect:/currency";
     }
     @GetMapping("/currency/{currencyId}/edit")
@@ -48,7 +55,12 @@ public class CurrencyController {
 
     }
     @PostMapping("/currency/{currencyId}/edit")
-    public String updateCurrency(@PathVariable("currencyId") Long currencyId, @ModelAttribute("currency") CurrencyDto currency){
+    public String updateCurrency(@PathVariable("currencyId") Long currencyId,
+                                 @Valid @ModelAttribute("currency") CurrencyDto currency,
+                                 BindingResult result){
+        if (result.hasErrors()){
+            return "currency-edit";
+        }
         currency.setId(currencyId);
         currencyService.updateCurrency(currency);
         return"redirect:/currency";

@@ -25,7 +25,8 @@ public class Currencyserviceimpl implements CurrencyService {
     }
 
     @Override
-    public Currency saveCurrency(Currency currency) {
+    public Currency saveCurrency(CurrencyDto currencyDto) {
+        Currency currency=mapToCurrency(currencyDto);
         return currencyRepository.save(currency);
     }
 
