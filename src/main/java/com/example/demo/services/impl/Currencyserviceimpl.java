@@ -29,6 +29,31 @@ public class Currencyserviceimpl implements CurrencyService {
         return currencyRepository.save(currency);
     }
 
+    @Override
+    public CurrencyDto findByClubId(long currencyId) {
+        Currency currency=currencyRepository.findById(currencyId).get();
+        return mapToCurrencyDto(currency);
+    }
+
+    @Override
+    public void updateCurrency(CurrencyDto currencyDto) {
+        Currency currency= mapToCurrency(currencyDto);
+        currencyRepository.save(currency);
+    }
+
+    private Currency mapToCurrency(CurrencyDto currency){
+        Currency currencyDto= Currency.builder()
+                .id(currency.getId())
+                .title(currency.getTitle())
+                .rate(currency.getRate())
+                .url(currency.getUrl())
+                .currencyDate(currency.getCurrencyDate())
+                .build();
+        return currencyDto;
+
+    }
+
+
     private CurrencyDto mapToCurrencyDto(Currency currency){
         CurrencyDto currencyDto = CurrencyDto.builder()
                 .id(currency.getId())
@@ -39,42 +64,4 @@ public class Currencyserviceimpl implements CurrencyService {
                 .build();
         return currencyDto;
     }
-
 }
-//package com.example.demo.services.impl;
-//
-//import com.example.demo.dto.CurrencyDto;
-//import com.example.demo.repository.CurrencyRepository;
-//import com.example.demo.services.CurrencyService;
-//import com.example.demo.model.Currency;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
-//
-//import java.util.List;
-//import java.util.stream.Collectors;
-//
-//@Service
-//public class CurrencyServiceImpl implements CurrencyService {
-//    private CurrencyRepository currencyRepository;
-//
-//    @Autowired
-//    public CurrencyServiceImpl(CurrencyRepository currencyRepository) {
-//        this.currencyRepository = currencyRepository;
-//    }
-//
-//    @Override
-//    public List<CurrencyDto> findAllCurrencies() {
-//        return currencyRepository.findAll().stream()
-//                .map(this::mapToCurrencyDto)
-//                .collect(Collectors.toList());
-//    }
-//
-//    private CurrencyDto mapToCurrencyDto(Currency currency){
-//        return new CurrencyDto(
-//                currency.getId(),
-//                currency.getTitle(),
-//                currency.getCreatedOn(),
-//                currency.getUpdated()
-//        );
-//    }
-//}

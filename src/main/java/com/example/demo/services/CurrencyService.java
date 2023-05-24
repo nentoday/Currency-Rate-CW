@@ -8,4 +8,8 @@ import java.util.List;
 public interface CurrencyService {
     List <CurrencyDto> findAllCurrencies();
     Currency saveCurrency(Currency currency);
+
+    CurrencyDto findByClubId(long currencyId);
+
+    void updateCurrency(CurrencyDto currency);
 }
