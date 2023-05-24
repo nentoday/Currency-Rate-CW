@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class CurrencyDto {
     private Long id;
     private String title;
+    private double rate;
     private String url;
-    private LocalDate createdOn;
-    private LocalDate updated;
+    private LocalDate currencyDate;
 }

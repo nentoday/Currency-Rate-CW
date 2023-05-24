@@ -1,11 +1,14 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.CurrencyDto;
+import com.example.demo.model.Currency;
 import com.example.demo.services.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -24,7 +27,21 @@ public class CurrencyController {
         model.addAttribute("currencies",currencies);
         return "currencies-list";
     }
+    @GetMapping("/currency/new")
+    public String createCurrencyForm(Model model){
+        Currency currency= new Currency();
+        model.addAttribute("currency",currency);
+        return "currency-create.html";
+
+    }
+    @PostMapping("/currency/new")
+    public String saveCurrency(@ModelAttribute("currency") Currency currency){
+        currencyService.saveCurrency(currency);
+        return "redirect:/currency";
+    }
 }
+
+
 //import com.example.demo.repository.CurrencyRepository;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Controller;

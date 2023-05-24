@@ -23,13 +23,19 @@ public class Currencyserviceimpl implements CurrencyService {
         List <Currency> currencies = currencyRepository.findAll();
         return currencies.stream().map((currency) -> mapToCurrencyDto(currency)).collect(Collectors.toList());
     }
+
+    @Override
+    public Currency saveCurrency(Currency currency) {
+        return currencyRepository.save(currency);
+    }
+
     private CurrencyDto mapToCurrencyDto(Currency currency){
         CurrencyDto currencyDto = CurrencyDto.builder()
                 .id(currency.getId())
                 .title(currency.getTitle())
+                .rate(currency.getRate())
                 .url(currency.getUrl())
-                .createdOn(currency.getCreatedOn())
-                .updated(currency.getUpdated())
+                .currencyDate(currency.getCurrencyDate())
                 .build();
         return currencyDto;
     }
