@@ -49,15 +49,6 @@
                         <p th:if="${#fields.hasErrors('url')}" class="text-danger" th:errors="*{url}"></p>
 
                     </div>
-                        <label for="date">Choose your period</label>
-                        <div class="form-select-sm col-md-6"
-                             id="date">
-                            <label for="currencyDate">Start Date:</label>
-                            <input type="date"
-                                   id="currencyDate"
-                                   name="currencyDate"
-                                   th:field="*{currencyDate}">
-                        </div>
                        <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
             </div>

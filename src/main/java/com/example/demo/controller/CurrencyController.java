@@ -37,6 +37,13 @@ public class CurrencyController {
         return "currency-create.html";
 
     }
+    @GetMapping("/currency/{currencyId}")
+    public String currencyDetail(@PathVariable("currencyId") Long currencyId, Model model){
+        CurrencyDto currencyDto = currencyService.findByClubId(currencyId);
+        model.addAttribute("currency", currencyDto);
+        return "currency-detail";
+    }
+
     @PostMapping("/currency/new")
     public String saveCurrency(@Valid @ModelAttribute("currency") CurrencyDto currencyDto,
                                BindingResult result, Model model){

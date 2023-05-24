@@ -11,7 +11,7 @@
         <div class="container px-5 my-5">
             <div class="text-center mb-5">
                 <h1 class="fw-bolder">Always in time</h1>
-                <p class="lead fw-normal text-muted mb-0">Choose your rate now</p>
+                <p class="lead fw-normal text-muted mb-0">Travel because money returns, time doesn’t</p>
             </div>
             <div class="row gx-5">
                 <div th:each="currency:${currencies}" class="col-lg-6 mb-2">
@@ -19,6 +19,7 @@
                         <img class="img-fluid rounded-3 mb-3" th:src="${currency.url}" alt="..." />
                         <a th:text="${currency.title}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
                     </div>
+                    <a class="btn btn-primary" th:href="@{/currency/{currencyId}(currencyId=${currency.id})}">View</a>
                     <a class="btn btn-primary" th:href="@{/currency/{currencyId}/edit(currencyId=${currency.id})}">Edit</a>
                 </div>
             </div>
