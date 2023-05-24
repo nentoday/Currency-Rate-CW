@@ -2,7 +2,6 @@
         xmlns:th="http://thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorate="~{layout}">
-
 <body class="d-flex flex-column h-100">
 <main class="flex-shrink-0">
     <!-- Page Content-->
@@ -16,7 +15,7 @@
                 <div th:each="currency:${currencies}" class="col-lg-6">
                     <div class="position-relative mb-5">
                         <img class="img-fluid rounded-3 mb-3" th:src="${currency.url}" alt="..." />
-                        <a th:text="${currency.title    }" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
+                        <a th:text="${currency.title}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
                     </div>
                 </div>
             </div>
