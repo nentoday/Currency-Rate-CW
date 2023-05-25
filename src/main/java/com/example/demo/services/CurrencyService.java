@@ -12,4 +12,6 @@ public interface CurrencyService {
     CurrencyDto findByClubId(long currencyId);
 
     void updateCurrency(CurrencyDto currency);
+
+    void delete(Long currencyId);
 }

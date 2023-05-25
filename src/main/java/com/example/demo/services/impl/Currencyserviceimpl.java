@@ -42,6 +42,11 @@ public class Currencyserviceimpl implements CurrencyService {
         currencyRepository.save(currency);
     }
 
+    @Override
+    public void delete(Long currencyId) {
+        currencyRepository.deleteById(currencyId);
+    }
+
     private Currency mapToCurrency(CurrencyDto currency){
         Currency currencyDto= Currency.builder()
                 .id(currency.getId())

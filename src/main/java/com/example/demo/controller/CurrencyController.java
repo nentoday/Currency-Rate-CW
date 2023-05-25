@@ -72,6 +72,11 @@ public class CurrencyController {
         currencyService.updateCurrency(currency);
         return"redirect:/currency";
     }
+    @GetMapping("currency/{currencyId}/delete")
+    public String deleteCurrency(@PathVariable("currencyId") Long currencyId){
+        currencyService.delete(currencyId);
+        return "redirect:/currency";
 
+    }
 
 }
