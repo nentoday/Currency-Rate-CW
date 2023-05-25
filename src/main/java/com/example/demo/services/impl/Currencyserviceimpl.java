@@ -47,6 +47,12 @@ public class Currencyserviceimpl implements CurrencyService {
         currencyRepository.deleteById(currencyId);
     }
 
+    @Override
+    public List<CurrencyDto> searchCurrency(String query) {
+        List<Currency> currencies=currencyRepository.searchCurrency(query);
+        return currencies.stream().map(currency -> mapToCurrencyDto(currency)).collect(Collectors.toList());
+    }
+
     private Currency mapToCurrency(CurrencyDto currency){
         Currency currencyDto= Currency.builder()
                 .id(currency.getId())

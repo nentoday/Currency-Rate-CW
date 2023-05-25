@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -76,6 +73,14 @@ public class CurrencyController {
     public String deleteCurrency(@PathVariable("currencyId") Long currencyId){
         currencyService.delete(currencyId);
         return "redirect:/currency";
+
+    }
+    @GetMapping("/currency/search")
+    public String searchCurrency(@RequestParam(value = "query") String query, Model model){
+        List<CurrencyDto> currencies = currencyService.searchCurrency(query);
+        model.addAttribute("currencies", currencies);
+        return "currencies-list";
+
 
     }
 

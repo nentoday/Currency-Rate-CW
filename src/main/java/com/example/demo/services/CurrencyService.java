@@ -14,4 +14,5 @@ public interface CurrencyService {
     void updateCurrency(CurrencyDto currency);
 
     void delete(Long currencyId);
+    List<CurrencyDto> searchCurrency(String query);
 }
