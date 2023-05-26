@@ -1,12 +1,11 @@
 package com.example.demo.dto;
 
-import com.example.demo.model.Currency;
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,10 +14,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DateDto {
-    private Long id;
+    private Long dateId;
     private float rate;
-    private LocalDate today;
-    private LocalDate startDate;
-    private LocalDate localDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate rateDate;
     private LocalDateTime createdOn;
 }

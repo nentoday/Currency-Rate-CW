@@ -12,25 +12,21 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
-@Table(name = "dates")
+@Table(name="Rate Table")
 public class Date {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long dateId;
     private float rate;
-    private LocalDate today = LocalDate.now();
-    private LocalDate startDate;
-    private LocalDate localDate;
+    private LocalDate rateDate;
     @CreationTimestamp
     private LocalDateTime createdOn;
-
     @ManyToOne
     @JoinColumn(name = "currency_id",nullable = false)
     private Currency currency;
 //    private LocalDate from = LocalDate.parse(localDate);
-//    private LocalDate to = LocalDate.parse(localDate);
 }
