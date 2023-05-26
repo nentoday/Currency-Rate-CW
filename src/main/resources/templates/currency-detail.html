@@ -30,6 +30,7 @@
               <h2 class="card-title">Country</h2>
               <p class="card-text" th:text="${'Currency symbol: '+currency.symbol}"></p>
               <a class="btn btn-primary" th:href="@{/currency/{currencyId}/delete(currencyId=${currency.id})}">Delete</a>
+              <a class="btn btn-primary" th:href="@{/rate/{currencyId}/new(currencyId=${currencyId})}">Add new date</a>
             </div>
           </div>
           <!-- Nested row for non-featured blog posts-->
