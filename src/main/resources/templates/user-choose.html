@@ -1,0 +1,48 @@
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+<head>
+  <title>Currency Rate</title>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+  <section layout:fragment="body" class="py-5">
+    <div class="container px-5 my-5">
+      <div class="text-center mb-5">
+        <div class="container px-5 my-5">
+          <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+            <div class="form-floating mb-3">
+              <select class="form-select" id="chooseYourCurrency" aria-label="Choose your currency">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+              <label for="chooseYourCurrency">Choose your currency</label>
+            </div>
+            <label for="date">Choose your period</label>
+            <div class="form-select-sm col-md-6"
+                 id="date">
+              <label for="currencyDate">Start Date:</label>
+              <input type="date"
+                     id="currencyDate"
+                     name="currencyDate"
+                     th:field="*{currencyDate}">
+            </div>
+            <div class="mb-3">
+              <div class="form-check form-switch">
+                <input class="form-check-input" id="whatever" type="checkbox" name="whatever" />
+                <label class="form-check-label" for="whatever">whatever</label>
+              </div>
+            </div>
+            <div class="d-grid">
+              <button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>
