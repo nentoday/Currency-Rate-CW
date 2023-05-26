@@ -21,20 +21,20 @@
                                 id="title"
                                 name="title"
                                 th:field="*{title}"
-                                placeholder="Enter currency name">
+                                placeholder="Enter currency title">
                         <p th:if="${#fields.hasErrors('title')}" class="text-danger" th:errors="*{title}"></p>
 
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="rate">Rate</label>
+                        <label for="country">Country</label>
                         <input
                                 type="text"
                                 class="form-control"
-                                id="rate"
-                                name="rate"
-                                th:field="*{rate}"
-                                placeholder="Rate">
-                        <p th:if="${#fields.hasErrors('rate')}" class="text-danger" th:errors="*{rate}"></p>
+                                id="country"
+                                name="country"
+                                th:field="*{country}"
+                                placeholder="Country">
+                        <p th:if="${#fields.hasErrors('country')}" class="text-danger" th:errors="*{country}"></p>
 
                     </div>
                     <div class="form-group col-md-6">
@@ -49,7 +49,18 @@
                         <p th:if="${#fields.hasErrors('url')}" class="text-danger" th:errors="*{url}"></p>
 
                     </div>
-                       <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="form-group col-md-6">
+                        <label for="symbol">Currency symbol</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="symbol"
+                                name="symbol"
+                                th:field="*{symbol}"
+                                placeholder="Insert Currency symbol">
+                        <p th:if="${#fields.hasErrors('symbol')}" class="text-danger" th:errors="*{symbol}"></p>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
             </div>
         </form>

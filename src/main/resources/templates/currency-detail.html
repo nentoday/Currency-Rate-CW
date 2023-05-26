@@ -26,9 +26,9 @@
           <div class="card mb-4">
             <a href="#!"><img class="card-img-top" th:src="${currency.url}" alt="..." /></a>
             <div class="card-body">
-              <div class="small text-muted" th:text="${currency.currencyDate}"></div>
-              <h2 class="card-title">Current rate</h2>
-              <p class="card-text" th:text="${currency.rate}"></p>
+              <div class="small text-muted" th:text="${currency.country}"></div>
+              <h2 class="card-title">Country</h2>
+              <p class="card-text" th:text="${'Currency symbol: '+currency.symbol}"></p>
               <a class="btn btn-primary" th:href="@{/currency/{currencyId}/delete(currencyId=${currency.id})}">Delete</a>
             </div>
           </div>

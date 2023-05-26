@@ -57,9 +57,10 @@ public class Currencyserviceimpl implements CurrencyService {
         Currency currencyDto= Currency.builder()
                 .id(currency.getId())
                 .title(currency.getTitle())
-                .rate(currency.getRate())
                 .url(currency.getUrl())
-                .currencyDate(currency.getCurrencyDate())
+                .country(currency.getCountry())
+                .updatedOn(currency.getUpdatedOn())
+                .symbol(currency.getSymbol())
                 .build();
         return currencyDto;
 
@@ -70,9 +71,10 @@ public class Currencyserviceimpl implements CurrencyService {
         CurrencyDto currencyDto = CurrencyDto.builder()
                 .id(currency.getId())
                 .title(currency.getTitle())
-                .rate(currency.getRate())
                 .url(currency.getUrl())
-                .currencyDate(currency.getCurrencyDate())
+                .country(currency.getCountry())
+                .updatedOn(currency.getUpdatedOn())
+                .symbol(currency.getSymbol())
                 .build();
         return currencyDto;
     }
