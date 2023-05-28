@@ -1,5 +1,6 @@
 package com.example.demo.services.impl;
 
+import com.example.demo.dto.CurrencyDto;
 import com.example.demo.dto.DateDto;
 import com.example.demo.model.Currency;
 import com.example.demo.model.Date;
@@ -8,6 +9,11 @@ import com.example.demo.repository.DateRepository;
 import com.example.demo.services.DateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import static com.example.demo.mapper.DateMapper.mapToDate;
 
 @Service
 public class DateServiceimp implements DateService {
@@ -27,12 +33,11 @@ public class DateServiceimp implements DateService {
         dateRepository.save(date);
     }
 
-    private Date mapToDate(DateDto dateDto){
-        return Date.builder()
-                .dateId(dateDto.getDateId())
-                .rate(dateDto.getRate())
-                .rateDate(dateDto.getRateDate())
-                .createdOn(dateDto.getCreatedOn())
-                .build();
+
+    public Date findById(LocalDate today, Long currencyId) {
+        Date dates=dateRepository.findByRateDateAndCurrency_Id(today,currencyId).get();
+        return dates;
     }
+
+
 }

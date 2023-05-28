@@ -36,7 +36,7 @@ public class CurrencyController {
     }
     @GetMapping("/currency/{currencyId}")
     public String currencyDetail(@PathVariable("currencyId") Long currencyId, Model model){
-        CurrencyDto currencyDto = currencyService.findByClubId(currencyId);
+        CurrencyDto currencyDto = currencyService.findByCurrencyId(currencyId);
         model.addAttribute("currency", currencyDto);
         return "currency-detail";
     }
@@ -53,7 +53,7 @@ public class CurrencyController {
     }
     @GetMapping("/currency/{currencyId}/edit")
     public String editCurrencyForm(@PathVariable("currencyId") Long currencyId,Model model){
-        CurrencyDto currency=currencyService.findByClubId(currencyId);
+        CurrencyDto currency=currencyService.findByCurrencyId(currencyId);
         model.addAttribute("currency", currency);
         return "currency-edit";
 
@@ -80,7 +80,6 @@ public class CurrencyController {
         List<CurrencyDto> currencies = currencyService.searchCurrency(query);
         model.addAttribute("currencies", currencies);
         return "currencies-list";
-
 
     }
 

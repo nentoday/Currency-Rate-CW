@@ -12,4 +12,12 @@ public class DateMapper {
                 .createdOn(dateDto.getCreatedOn())
                 .build();
     }
+    public static DateDto mapToDateDto(Date date){
+        return DateDto.builder()
+                .dateId(date.getDateId())
+                .rate(date.getRate())
+                .rateDate(date.getRateDate())
+                .createdOn(date.getCreatedOn())
+                .build();
+    }
 }

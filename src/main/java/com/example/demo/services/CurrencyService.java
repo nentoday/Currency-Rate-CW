@@ -9,7 +9,7 @@ public interface CurrencyService {
     List <CurrencyDto> findAllCurrencies();
     Currency saveCurrency(CurrencyDto currencyDto);
 
-    CurrencyDto findByClubId(long currencyId);
+    CurrencyDto findByCurrencyId(long currencyId);
 
     void updateCurrency(CurrencyDto currency);
 

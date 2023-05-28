@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -25,6 +26,6 @@ public class CurrencyDto {
     @NotEmpty(message ="enter the currency symbol")
     private String symbol;
     private LocalDateTime updatedOn;
-
+    private List<DateDto> dates;
 
 }

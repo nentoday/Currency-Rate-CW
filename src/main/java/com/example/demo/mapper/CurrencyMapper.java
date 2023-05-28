@@ -1,7 +1,12 @@
 package com.example.demo.mapper;
 
 import com.example.demo.dto.CurrencyDto;
+import com.example.demo.dto.DateDto;
 import com.example.demo.model.Currency;
+
+import java.util.stream.Collectors;
+
+import static com.example.demo.mapper.DateMapper.mapToDateDto;
 
 public class CurrencyMapper {
 
@@ -27,6 +32,7 @@ public class CurrencyMapper {
                 .country(currency.getCountry())
                 .updatedOn(currency.getUpdatedOn())
                 .symbol(currency.getSymbol())
+                .dates(currency.getDate().stream().map((date) -> mapToDateDto(date)).collect(Collectors.toList()))
                 .build();
         return currencyDto;
     }

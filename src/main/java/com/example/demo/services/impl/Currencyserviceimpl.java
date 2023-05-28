@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.example.demo.mapper.CurrencyMapper.mapToCurrency;
+import static com.example.demo.mapper.CurrencyMapper.mapToCurrencyDto;
+
 @Service
 public class Currencyserviceimpl implements CurrencyService {
     private CurrencyRepository currencyRepository;
@@ -31,7 +35,7 @@ public class Currencyserviceimpl implements CurrencyService {
     }
 
     @Override
-    public CurrencyDto findByClubId(long currencyId) {
+    public CurrencyDto findByCurrencyId(long currencyId) {
         Currency currency=currencyRepository.findById(currencyId).get();
         return mapToCurrencyDto(currency);
     }
@@ -51,31 +55,5 @@ public class Currencyserviceimpl implements CurrencyService {
     public List<CurrencyDto> searchCurrency(String query) {
         List<Currency> currencies=currencyRepository.searchCurrency(query);
         return currencies.stream().map(currency -> mapToCurrencyDto(currency)).collect(Collectors.toList());
-    }
-
-    private Currency mapToCurrency(CurrencyDto currency){
-        Currency currencyDto= Currency.builder()
-                .id(currency.getId())
-                .title(currency.getTitle())
-                .url(currency.getUrl())
-                .country(currency.getCountry())
-                .updatedOn(currency.getUpdatedOn())
-                .symbol(currency.getSymbol())
-                .build();
-        return currencyDto;
-
-    }
-
-
-    private CurrencyDto mapToCurrencyDto(Currency currency){
-        CurrencyDto currencyDto = CurrencyDto.builder()
-                .id(currency.getId())
-                .title(currency.getTitle())
-                .url(currency.getUrl())
-                .country(currency.getCountry())
-                .updatedOn(currency.getUpdatedOn())
-                .symbol(currency.getSymbol())
-                .build();
-        return currencyDto;
     }
 }
