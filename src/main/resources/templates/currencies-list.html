@@ -28,6 +28,14 @@
                         </div> </div>
                     <a class="btn btn-primary" th:href="@{/currency/{currencyId}(currencyId=${currency.id})}">View</a>
                     <a class="btn btn-primary" th:href="@{/currency/{currencyId}/edit(currencyId=${currency.id})}">Edit</a>
+                    <a class="btn btn-primary" th:href="@{/currency/{currencyId}/exchange-rate/today(currencyId=${currency.id})}">Today Rate</a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Period Rate</a>
+
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
+                        <li><a class="dropdown-item" th:href="@{/currency/{currencyId}/exchange-rate/week(currencyId=${currency.id})}">Week Rate</a></li>
+                        <li><a class="dropdown-item" th:href="@{/currency/{currencyId}/exchange-rate/month(currencyId=${currency.id})}">Month Rate</a></li>
+                        <li><a class="dropdown-item" th:href="@{/currency/{currencyId}/exchange-rate/year(currencyId=${currency.id})}">Year Rate</a></li>
+                    </ul>
                 </div>
             </div>
         </div>

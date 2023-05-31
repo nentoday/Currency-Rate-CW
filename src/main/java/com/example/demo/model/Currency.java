@@ -11,9 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 @Data
@@ -34,7 +32,7 @@ public class Currency {
    private LocalDateTime updatedOn;
 
    @OneToMany(mappedBy = "currency", cascade = CascadeType.REMOVE)
-   private List<Date> date= new ArrayList<>();
+   private List<Date> date = new ArrayList<>();
 
    @OneToMany(mappedBy = "currency", cascade = CascadeType.REMOVE)
    private List<ExchangeRate> rates=new ArrayList<>();

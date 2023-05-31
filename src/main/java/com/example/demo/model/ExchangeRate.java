@@ -22,6 +22,6 @@ public class ExchangeRate {
     @JoinColumn(name = "currency_id", nullable = false)
     private Currency currency;
     private double rate;
-    private LocalDate startDay;
-    private LocalDate endDay;
+    private LocalDate startDate;
+    private LocalDate endDate;
 }

@@ -34,13 +34,6 @@ public class CurrencyController {
         return "currency-create.html";
 
     }
-    @GetMapping("/currency/{currencyId}")
-    public String currencyDetail(@PathVariable("currencyId") Long currencyId, Model model){
-        CurrencyDto currencyDto = currencyService.findByCurrencyId(currencyId);
-        model.addAttribute("currency", currencyDto);
-        return "currency-detail";
-    }
-
     @PostMapping("/currency/new")
     public String saveCurrency(@Valid @ModelAttribute("currency") CurrencyDto currencyDto,
                                BindingResult result, Model model){
@@ -51,6 +44,14 @@ public class CurrencyController {
         currencyService.saveCurrency(currencyDto);
         return "redirect:/currency";
     }
+    @GetMapping("/currency/{currencyId}")
+    public String currencyDetail(@PathVariable("currencyId") Long currencyId, Model model){
+        CurrencyDto currencyDto = currencyService.findByCurrencyId(currencyId);
+        model.addAttribute("currency", currencyDto);
+        return "currency-detail";
+    }
+
+
     @GetMapping("/currency/{currencyId}/edit")
     public String editCurrencyForm(@PathVariable("currencyId") Long currencyId,Model model){
         CurrencyDto currency=currencyService.findByCurrencyId(currencyId);

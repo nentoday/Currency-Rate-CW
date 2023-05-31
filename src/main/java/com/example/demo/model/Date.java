@@ -22,6 +22,7 @@ public class Date {
     private Long dateId;
     private float rate;
     private LocalDate rateDate;
+
     @CreationTimestamp
     private LocalDateTime createdOn;
     @ManyToOne
