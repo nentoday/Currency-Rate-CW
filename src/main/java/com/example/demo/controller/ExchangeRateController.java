@@ -1,16 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.ExchangeRateDto;
-import com.example.demo.model.Currency;
 import com.example.demo.model.Date;
-import jakarta.validation.Valid;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.ui.Model;
-import com.example.demo.dto.CurrencyDto;
-import com.example.demo.services.CurrencyService;
 import com.example.demo.services.DateService;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -28,8 +21,9 @@ public class ExchangeRateController {
     public String viewExchangeRate(@PathVariable("currencyId") Long currencyId,
                                    @RequestParam(value = "period", required = false) String period,
                                    Model model) {
-        LocalDate startDate;
+
         LocalDate endDate = LocalDate.now();
+        LocalDate startDate = endDate;
         if (period != null) {
             switch (period) {
                 case "week":
@@ -41,25 +35,23 @@ public class ExchangeRateController {
                 case "year":
                     startDate = endDate.minusYears(1);
                     break;
-                default:
+                case "today":
                     startDate = endDate;
+                    model.addAttribute("startDate",startDate);
                     break;
             }
-        } else {
-            startDate = endDate;
         }
+        else startDate=endDate;
 
         List<Date> exchangeRates = dateService.findExchangeRate(currencyId, startDate, endDate);
         model.addAttribute("exchangeRates", exchangeRates);
-
         return "exchange-rate";
     }
     @GetMapping("/currency/{currencyId}/exchange-rate/today")
     public String viewExchangeRateForCurrentDay(@PathVariable("currencyId") Long currencyId, Model model) {
         LocalDate rateDate = LocalDate.now();
-        Date exchangeRates= dateService.findById(rateDate,currencyId);
+        List<Date> exchangeRates= dateService.findById(rateDate,currencyId);
         model.addAttribute("exchangeRates", exchangeRates);
         return "exchange-rate";
-
     }
 }

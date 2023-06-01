@@ -2,7 +2,8 @@
 <html   lang="en"
         xmlns:th="http://thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout}">
+        layout:decorate="~{layout}"
+        xmlns:sec="http://www.thymeleaf.org/">
 <head>
   <title>Details</title>
 </head>
@@ -29,41 +30,15 @@
               <div class="small text-muted" th:text="${currency.country}"></div>
               <h2 class="card-title">Country</h2>
               <p class="card-text" th:text="${'Currency symbol: '+currency.symbol}"></p>
-              <a class="btn btn-primary" th:href="@{/currency/{currencyId}/delete(currencyId=${currency.id})}">Delete</a>
-              <a class="btn btn-primary" th:href="@{/rate/{currencyId}/new(currencyId=${currencyId})}">Add new date</a>
-            </div>
-          </div>
-          <!-- Nested row for non-featured blog posts-->
-          <div class="row">
-            <div class="col-lg-6">
-              <!-- Blog post-->
-
-        <div class="col-lg-4">
-          <!-- Search widget-->
-
-          <!-- Categories widget-->
-          <div class="card mb-4">
-            <div class="card-header">Our partners</div>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm-6">
-                  <ul class="list-unstyled mb-0">
-                    <li><a href="https://www.cheapflights.com/book-flights-online/">Cheap Flights</a></li>
-                    <li><a href="https://www.realsimple.com/work-life/travel/best-way-pack-suitcase">Suitcase</a></li>
-                    <li><a href="https://lifehacker.com/how-to-get-the-best-exchange-rate-before-traveling-abro-1849035823">Exchange Lifehackes</a></li>
-                  </ul>
-                </div>
-              </div>
+              <div sec:authorize="hasAuthority('ADMIN')">
+                 <a class="btn btn-primary" th:href="@{/currency/{currencyId}/delete(currencyId=${currency.id})}">Delete</a>
+                <a class="btn btn-primary" th:href="@{/rate/{currencyId}/new(currencyId=${currencyId})}">Add new date</a>
               </div>
             </div>
-          </div>
-          <!-- Side widget-->
-
+            </div>
             </div>
           </div>
-        </div>
       </div>
-    </div>
   </section>
 </body>
 </html>

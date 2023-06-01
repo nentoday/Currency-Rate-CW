@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.example.demo.mapper.DateMapper.mapToDate;
 
@@ -33,35 +33,23 @@ public class DateServiceimp implements DateService {
         date.setCurrency(currency);
         dateRepository.save(date);
     }
-
-
-    public Date findById(LocalDate today, Long currencyId) {
-        Date dates=dateRepository.findByRateDateAndCurrency_Id(today,currencyId).get();
+    public List<Date> findById(LocalDate today, Long currencyId) {
+        List <Date>dates=dateRepository.findByRateDateAndCurrency_Id(today,currencyId);
         return dates;
     }
-    public List <Date> findAllById(LocalDate today, Long currencyId) {
-        List <Date> dates=dateRepository.findAllByCurrency_Id(currencyId);
-        return dates;
-    }
-
-
-
     @Override
     public List<Date> findExchangeRate(Long currencyId, LocalDate startDate, LocalDate endDate) {
         List<Date> thisRate = dateRepository.findAllByCurrency_Id(currencyId);
         List<Date> exchangeRate = new ArrayList<>();
-
         for (int i = 0; i < thisRate.size(); i++) {
             Date date = thisRate.get(i);
-            if (date.getRateDate().isAfter(startDate) && date.getRateDate().isBefore(endDate)) {
+            if (date.getRateDate().isAfter(startDate) && date.getRateDate().isBefore(endDate)||date.getRateDate().equals(startDate)||date.getRateDate().equals(endDate)) {
                 exchangeRate.add(date);
             }
-
         }
-
+        exchangeRate.sort(Comparator.comparing(Date::getRateDate));
         return exchangeRate;
     }
-//exchangeRate.stream().map(date -> mapToDate(date)).collect(Collectors.toList());
-    }
+}
 
 

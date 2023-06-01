@@ -13,19 +13,19 @@
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container px-5">
-        <a class="navbar-brand" th:href="@{/}">Time is money</a>
+        <a class="navbar-brand">Time is money</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div sec:authorize="hasAuthority('ADMIN')">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" th:href="@{/currency}">Currency List</a></li>
+                <div sec:authorize="hasAuthority('ADMIN')">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Additional</a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
                         <li><a class="dropdown-item" th:href="@{/currency/new}">Create Currency</a></li>
                     </ul>
                 </li>
-            </div>
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" th:href="@{/currency}">Currency List</a></li>
+                </div>
                 <li sec:authorize="!isAuthenticated()"  class="nav-item"><a class="nav-link me-3 btn btn-primary" th:href="@{/login}">Login</a></li>
                 <li sec:authorize="!isAuthenticated()"  class="nav-item"><a class="nav-link btn btn-primary" th:href="@{/register}">Register</a></li>
                 <li sec:authorize="isAuthenticated()" class="nav-item dropdown"></li>
@@ -40,6 +40,7 @@
 <section class="py-5 bg-light">
     <div class="container px-5 my-5">
         <h2 class="display-4 fw-bolder mb-4">Let's exchange something</h2>
+        <p>All exchange rates are entered relative to the Ukrainian hryvnia.</p>
         <a class="btn btn-lg btn-primary" href="https://github.com/nentoday">Contact us</a>
     </div>
 </section>

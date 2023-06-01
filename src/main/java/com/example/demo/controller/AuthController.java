@@ -31,9 +31,9 @@ public class AuthController {
     public String register(@Valid @ModelAttribute("user") UserEntity user,
                            BindingResult result, Model model) {
         UserEntity existingEmail = userService.findByEmail(user.getEmail());
-//        if (existingEmail != null) {
-//            result.rejectValue("email", "error.email", "There is already a user who uses this email");
-//        }
+        if (existingEmail != null) {
+            result.rejectValue("email", "error.email", "There is already a user who uses this email");
+        }
 
         UserEntity existingUsername = userService.findByUsername(user.getUsername());
         if (existingUsername != null) {

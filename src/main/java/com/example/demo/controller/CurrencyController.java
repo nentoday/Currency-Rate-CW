@@ -81,7 +81,6 @@ public class CurrencyController {
         List<CurrencyDto> currencies = currencyService.searchCurrency(query);
         model.addAttribute("currencies", currencies);
         return "currencies-list";
-
     }
 
 }

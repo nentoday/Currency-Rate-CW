@@ -11,6 +11,16 @@
 <main class="flex-shrink-0">
     <section layout:fragment="body" class="py-5">
         <div class="container px-5 my-5">
+            <h4 th:if="${startDate != null}">
+                This is rate for today.
+            </h4>
+            <h4 th:unless="${startDate != null}">
+                This is rate for a period.
+            </h4>
+            <div th:if="${exchangeRates.empty}">
+                <p>Data will be updated soon. Please check back later.</p>
+            </div>
+            <div th:unless="${exchangeRates.empty}">
             <table class="table">
                 <thead>
                 <tr>
@@ -27,6 +37,7 @@
                 </tr>
                 </tbody>
             </table>
+            </div>
         </div>
     </section>
 </main>
