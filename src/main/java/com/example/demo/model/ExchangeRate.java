@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -17,11 +16,9 @@ public class ExchangeRate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne
     @JoinColumn(name = "currency_id", nullable = false)
     private Currency currency;
-    private double rate;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private String username;
+    private String password;
 }

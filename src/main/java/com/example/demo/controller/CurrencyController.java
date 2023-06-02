@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.controller.Exceptions.DataNotFoundException;
 import com.example.demo.dto.CurrencyDto;
 import com.example.demo.model.Currency;
 import com.example.demo.services.CurrencyService;
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class CurrencyController {
@@ -77,10 +79,17 @@ public class CurrencyController {
 
     }
     @GetMapping("/currency/search")
-    public String searchCurrency(@RequestParam(value = "query") String query, Model model){
-        List<CurrencyDto> currencies = currencyService.searchCurrency(query);
-        model.addAttribute("currencies", currencies);
+    public String searchCurrency(@RequestParam(value = "query") String query, Model model) {
+        try {
+            List<CurrencyDto> currencies = currencyService.searchCurrency(query);
+            model.addAttribute("currencies", currencies);
+
+        } catch (DataNotFoundException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+        }
         return "currencies-list";
     }
+
+
 
 }

@@ -18,7 +18,12 @@
                 <div>
                     <form th:action="@{/currency/search}" class="form-inline my-2 my-lg-0 md-3">
                         <input name="query" class="form-control mr-sm-2 mb-5" type="search" placeholder="Search currency" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
+                </div>
+
+                <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+                    <p th:text="${errorMessage}"></p>
                 </div>
                 <div th:each="currency:${currencies}" class="col-lg-6 mb-2">
                     <div class="position-relative mb-3">

@@ -1,5 +1,6 @@
 package com.example.demo.services.impl;
 
+import com.example.demo.controller.Exceptions.DataNotFoundException;
 import com.example.demo.dto.CurrencyDto;
 import com.example.demo.repository.CurrencyRepository;
 import com.example.demo.services.CurrencyService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.example.demo.mapper.CurrencyMapper.mapToCurrency;
@@ -53,7 +55,13 @@ public class Currencyserviceimpl implements CurrencyService {
 
     @Override
     public List<CurrencyDto> searchCurrency(String query) {
-        List<Currency> currencies=currencyRepository.searchCurrency(query);
-        return currencies.stream().map(currency -> mapToCurrencyDto(currency)).collect(Collectors.toList());
+        List<Currency> currencies = currencyRepository.searchCurrency(query);
+        if (currencies.isEmpty()) {
+            throw new DataNotFoundException("Please enter right currency");
+        }
+        return currencies.stream()
+                .map(currency -> mapToCurrencyDto(currency))
+                .collect(Collectors.toList());
     }
+
 }
