@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.example.demo.mapper.DateMapper.mapToDate;
 
@@ -40,15 +40,36 @@ public class DateServiceimp implements DateService {
     @Override
     public List<Date> findExchangeRate(Long currencyId, LocalDate startDate, LocalDate endDate) {
         List<Date> thisRate = dateRepository.findAllByCurrency_Id(currencyId);
-        List<Date> exchangeRate = new ArrayList<>();
-        for (int i = 0; i < thisRate.size(); i++) {
-            Date date = thisRate.get(i);
-            if (date.getRateDate().isAfter(startDate) && date.getRateDate().isBefore(endDate)||date.getRateDate().equals(startDate)||date.getRateDate().equals(endDate)) {
-                exchangeRate.add(date);
-            }
-        }
+        List<Date> exchangeRate = thisRate.stream()
+                .filter(date -> date.getRateDate().isAfter(startDate.minusDays(1)) && date.getRateDate().isBefore(endDate.plusDays(1)))
+                .sorted(Comparator.comparing(Date::getRateDate).reversed())
+                .collect(Collectors.toList());
+        return exchangeRate;
+    }
+
+    @Override
+    public List<Date> findAllDates(Long currencyId) {
+        List<Date> exchangeRate=dateRepository.findAllByCurrency_Id(currencyId);
         exchangeRate.sort(Comparator.comparing(Date::getRateDate));
         return exchangeRate;
+
+    }
+
+    @Override
+    public DateDto findByDateId(Long dateId) {
+        DateDto date= dateRepository.findByDateId(dateId);
+        return date;
+    }
+
+    @Override
+    public void updateRate(DateDto dateDto) {
+        Date date=mapToDate(dateDto);
+        dateRepository.save(date);
+    }
+
+    @Override
+    public void delete(Long dateId) {
+        dateRepository.deleteById(dateId);
     }
 }
 

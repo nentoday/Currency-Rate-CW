@@ -28,5 +28,4 @@ public class Date {
     @ManyToOne
     @JoinColumn(name = "currency_id",nullable = false)
     private Currency currency;
-//    private LocalDate from = LocalDate.parse(localDate);
 }

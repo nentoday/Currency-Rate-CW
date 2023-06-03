@@ -37,9 +37,33 @@
               </div>
             </div>
             </div>
-            </div>
-          </div>
+          <table class="table">
+            <thead>
+            <tr>
+              <th>Currency</th>
+              <th>Exchange Rate</th>
+              <th>Rate Date</th>
+              <div sec:authorize="hasAuthority('ADMIN')">
+              <th>Edit</th>
+              <th>Delete</th>
+              </div>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="date: ${exchangeRate}">
+              <td th:text="${date.currency.title}"></td>
+              <td th:text="${date.rate}"></td>
+              <td th:text="${date.rateDate}"></td>
+              <div sec:authorize="hasAuthority('ADMIN')">
+              <td><a class="btn btn-success" th:href="@{/rate/{dateId}/edit(dateId=${date.dateId})}">Edit</a></td>
+              <td><a class="btn btn-primary" th:href="@{/rate/{dateId}/delete(dateId=${date.dateId})}">Delete</a></td>
+              </div>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
+    </div>
   </section>
 </body>
 </html>

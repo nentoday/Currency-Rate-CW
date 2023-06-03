@@ -3,7 +3,9 @@ package com.example.demo.controller;
 import com.example.demo.exceptions.DataNotFoundException;
 import com.example.demo.dto.CurrencyDto;
 import com.example.demo.model.Currency;
+import com.example.demo.model.Date;
 import com.example.demo.services.CurrencyService;
+import com.example.demo.services.DateService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,10 +18,12 @@ import java.util.List;
 @Controller
 public class CurrencyController {
     private CurrencyService currencyService;
+    private DateService dateService;
     @Autowired
 
-    public CurrencyController(CurrencyService currencyService) {
+    public CurrencyController(CurrencyService currencyService, DateService dateService) {
         this.currencyService = currencyService;
+        this.dateService =dateService;
     }
   //User
     @GetMapping("/currency")
@@ -32,6 +36,8 @@ public class CurrencyController {
     @GetMapping("/currency/{currencyId}")
     public String currencyDetail(@PathVariable("currencyId") Long currencyId, Model model){
         CurrencyDto currencyDto = currencyService.findByCurrencyId(currencyId);
+        List<Date> exchangeRate = dateService.findAllDates(currencyId);
+        model.addAttribute("exchangeRate",exchangeRate);
         model.addAttribute("currency", currencyDto);
         return "userview/currency-detail";
     }
@@ -90,7 +96,7 @@ public class CurrencyController {
     public String showDeleteConfirmation(@PathVariable("currencyId") Long currencyId, Model model) {
         CurrencyDto currency = currencyService.findByCurrencyId(currencyId);
         model.addAttribute("currency", currency);
-        return "admin/delete-confirmation";
+        return "admin/currency-delete";
     }
 
     @PostMapping("/currency/{currencyId}/delete")

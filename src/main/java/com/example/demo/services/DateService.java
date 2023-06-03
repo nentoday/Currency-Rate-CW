@@ -14,5 +14,11 @@ public interface DateService {
     List <Date> findExchangeRate(Long currencyId, LocalDate startDate, LocalDate endDate);
 
 
+    List<Date> findAllDates(Long currencyId);
 
+    DateDto findByDateId(Long dateId);
+
+    void updateRate(DateDto dateDto);
+
+    void delete(Long dateId);
 }

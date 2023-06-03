@@ -11,4 +11,5 @@ import java.util.List;
 public interface DateRepository extends JpaRepository <Date, Long> {
     List<Date> findByRateDateAndCurrency_Id(LocalDate dateRate, Long currencyId);
     List<Date> findAllByCurrency_Id(Long currencyId);
-}
+    DateDto findByDateId(Long dateId);
+  }

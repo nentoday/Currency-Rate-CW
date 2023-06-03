@@ -1,0 +1,49 @@
+<html   lang="en"
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+<head>
+    <title>Edit Rate</title>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <!-- Page Content-->
+    <section layout:fragment="body" class="py-5">
+        <form role="form" method="post" th:action="@{/rate/{dateId}/edit(dateId=${dateId})}" th:object="${date}">
+            <input type="hidden" th:field="*{dateId}">
+
+            <div class="container">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="rate">Change Currency</label>
+                        <input type="text"
+                               class="form-control"
+                               id="rate"
+                               name="rate"
+                               th:field="*{rate}"
+                               placeholder="Enter current rate">
+
+                        <p th:if="${#fields.hasErrors('rate')}" class="text-danger" th:errors="*{rate}"></p>
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="rateDate">Change Date</label>
+
+
+                        <input type="date"
+                               class="form-control"
+                               id="rateDate"
+                               name="rateDate"
+                               th:field="*{rateDate}"
+                               placeholder="rate Date">
+                        <p th:if="${#fields.hasErrors('rateDate')}" class="text-danger" th:errors="*{rateDate}"></p>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>

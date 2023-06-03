@@ -10,6 +10,7 @@ public class DateMapper {
                 .rate(dateDto.getRate())
                 .rateDate(dateDto.getRateDate())
                 .createdOn(dateDto.getCreatedOn())
+                .currency(dateDto.getCurrency())
                 .build();
     }
     public static DateDto mapToDateDto(Date date){
@@ -18,6 +19,7 @@ public class DateMapper {
                 .rate(date.getRate())
                 .rateDate(date.getRateDate())
                 .createdOn(date.getCreatedOn())
+                .currency(date.getCurrency())
                 .build();
     }
 }

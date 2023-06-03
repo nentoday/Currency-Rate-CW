@@ -10,7 +10,6 @@
   <section layout:fragment="body" class="py-5">
     <div class="container px-5 my-5">
       <h2>Are you sure you want to delete "<span th:text="${currency.title}"></span>" currency?</h2>
-
       <form th:action="@{/currency/{currencyId}/delete(currencyId=${currency.id})}" method="post">
         <button type="submit">Submit</button>
       </form>
