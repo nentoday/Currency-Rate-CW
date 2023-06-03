@@ -1,6 +1,6 @@
 package com.example.demo.services.impl;
 
-import com.example.demo.controller.Exceptions.DataNotFoundException;
+import com.example.demo.exceptions.DataNotFoundException;
 import com.example.demo.dto.CurrencyDto;
 import com.example.demo.repository.CurrencyRepository;
 import com.example.demo.services.CurrencyService;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.example.demo.mapper.CurrencyMapper.mapToCurrency;

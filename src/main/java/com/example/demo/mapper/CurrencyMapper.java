@@ -17,6 +17,7 @@ public class CurrencyMapper {
                 .country(currency.getCountry())
                 .updatedOn(currency.getUpdatedOn())
                 .symbol(currency.getSymbol())
+                .details(currency.getDetails())
                 .build();
         return currencyDto;
 
@@ -31,6 +32,7 @@ public class CurrencyMapper {
                 .country(currency.getCountry())
                 .updatedOn(currency.getUpdatedOn())
                 .symbol(currency.getSymbol())
+                .details(currency.getDetails())
                 .dates(currency.getDate().stream().map((date) -> mapToDateDto(date)).collect(Collectors.toList()))
                 .build();
         return currencyDto;

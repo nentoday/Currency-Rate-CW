@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.controller.Exceptions.DataNotFoundException;
+import com.example.demo.exceptions.DataNotFoundException;
 import com.example.demo.dto.CurrencyDto;
 import com.example.demo.model.Currency;
 import com.example.demo.services.CurrencyService;
@@ -12,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class CurrencyController {
@@ -22,62 +21,21 @@ public class CurrencyController {
     public CurrencyController(CurrencyService currencyService) {
         this.currencyService = currencyService;
     }
-
+  //User
     @GetMapping("/currency")
     public String listCurrencies(Model model){
         List<CurrencyDto> currencies=currencyService.findAllCurrencies();
         model.addAttribute("currencies",currencies);
-        return "currencies-list";
+        return "userview/currencies-list";
     }
-    @GetMapping("/currency/new")
-    public String createCurrencyForm(Model model){
-        Currency currency= new Currency();
-        model.addAttribute("currency",currency);
-        return "currency-create.html";
 
-    }
-    @PostMapping("/currency/new")
-    public String saveCurrency(@Valid @ModelAttribute("currency") CurrencyDto currencyDto,
-                               BindingResult result, Model model){
-        if(result.hasErrors()){
-            model.addAttribute("currency", currencyDto);
-            return "currency-create";
-        }
-        currencyService.saveCurrency(currencyDto);
-        return "redirect:/currency";
-    }
     @GetMapping("/currency/{currencyId}")
     public String currencyDetail(@PathVariable("currencyId") Long currencyId, Model model){
         CurrencyDto currencyDto = currencyService.findByCurrencyId(currencyId);
         model.addAttribute("currency", currencyDto);
-        return "currency-detail";
+        return "userview/currency-detail";
     }
 
-
-    @GetMapping("/currency/{currencyId}/edit")
-    public String editCurrencyForm(@PathVariable("currencyId") Long currencyId,Model model){
-        CurrencyDto currency=currencyService.findByCurrencyId(currencyId);
-        model.addAttribute("currency", currency);
-        return "currency-edit";
-
-    }
-    @PostMapping("/currency/{currencyId}/edit")
-    public String updateCurrency(@PathVariable("currencyId") Long currencyId,
-                                 @Valid @ModelAttribute("currency") CurrencyDto currency,
-                                 BindingResult result){
-        if (result.hasErrors()){
-            return "currency-edit";
-        }
-        currency.setId(currencyId);
-        currencyService.updateCurrency(currency);
-        return"redirect:/currency";
-    }
-    @GetMapping("currency/{currencyId}/delete")
-    public String deleteCurrency(@PathVariable("currencyId") Long currencyId){
-        currencyService.delete(currencyId);
-        return "redirect:/currency";
-
-    }
     @GetMapping("/currency/search")
     public String searchCurrency(@RequestParam(value = "query") String query, Model model) {
         try {
@@ -87,9 +45,59 @@ public class CurrencyController {
         } catch (DataNotFoundException e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
-        return "currencies-list";
+        return "userview/currencies-list";
     }
 
+//Admin
+
+    @GetMapping("/currency/new")
+    public String createCurrencyForm(Model model){
+        Currency currency= new Currency();
+        model.addAttribute("currency",currency);
+        return "admin/currency-create";
+
+    }
+    @PostMapping("/currency/new")
+    public String saveCurrency(@Valid @ModelAttribute("currency") CurrencyDto currencyDto,
+                               BindingResult result, Model model){
+        if(result.hasErrors()){
+            model.addAttribute("currency", currencyDto);
+            return "admin/currency-create";
+        }
+        currencyService.saveCurrency(currencyDto);
+        return "redirect:/currency";
+    }
+    @GetMapping("/currency/{currencyId}/edit")
+    public String editCurrencyForm(@PathVariable("currencyId") Long currencyId,Model model){
+        CurrencyDto currency=currencyService.findByCurrencyId(currencyId);
+        model.addAttribute("currency", currency);
+        return "admin/currency-edit";
+
+    }
+    @PostMapping("/currency/{currencyId}/edit")
+    public String updateCurrency(@PathVariable("currencyId") Long currencyId,
+                                 @Valid @ModelAttribute("currency") CurrencyDto currency,
+                                 BindingResult result){
+        if (result.hasErrors()){
+            return "admin/currency-edit";
+        }
+        currency.setId(currencyId);
+        currencyService.updateCurrency(currency);
+        return"redirect:/currency";
+    }
+
+    @GetMapping("/currency/{currencyId}/delete")
+    public String showDeleteConfirmation(@PathVariable("currencyId") Long currencyId, Model model) {
+        CurrencyDto currency = currencyService.findByCurrencyId(currencyId);
+        model.addAttribute("currency", currency);
+        return "admin/delete-confirmation";
+    }
+
+    @PostMapping("/currency/{currencyId}/delete")
+    public String deleteCurrency(@PathVariable("currencyId") Long currencyId) {
+        currencyService.delete(currencyId);
+        return "redirect:/currency";
+    }
 
 
 }

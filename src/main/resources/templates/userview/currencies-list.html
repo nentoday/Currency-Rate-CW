@@ -15,13 +15,14 @@
                 <p class="lead fw-normal text-muted mb-0">Travel because money returns, time doesn’t</p>
             </div>
             <div class="row gx-5">
-                <div>
-                    <form th:action="@{/currency/search}" class="form-inline my-2 my-lg-0 md-3">
-                        <input name="query" class="form-control mr-sm-2 mb-5" type="search" placeholder="Search currency" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                </div>
-
+                <form th:action="@{/currency/search}" class="form-inline my-2 my-lg-4 md-3">
+                    <div class="input-group">
+                        <input name="query" class="form-control my-2 my-lg-0 md-3" type="search" placeholder="Search currency" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </div>
+                    </div>
+                </form>
                 <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
                     <p th:text="${errorMessage}"></p>
                 </div>
@@ -33,10 +34,6 @@
                             <a th:text="${currency.country}" class="h6 text-decoration-none link-dark stretched-link" href="#!"></a>
                         </div> </div>
                     <a class="btn btn-primary" th:href="@{/currency/{currencyId}(currencyId=${currency.id})}">View</a>
-                    <div sec:authorize="hasAuthority('ADMIN')">
-
-                    <a class="btn btn-primary" th:href="@{/currency/{currencyId}/edit(currencyId=${currency.id})}">Edit</a>
-                    </div>
                     <a class="btn btn-primary" th:href="@{/currency/{currencyId}/exchange-rate?period=today(currencyId=${currency.id})}">Today Rate</a>
                     <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Period Rate</a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
@@ -44,6 +41,9 @@
                         <li><a class="dropdown-item" th:href="@{/currency/{currencyId}/exchange-rate?period=month(currencyId=${currency.id})}">Month Rate</a></li>
                         <li><a class="dropdown-item" th:href="@{/currency/{currencyId}/exchange-rate?period=year(currencyId=${currency.id})}">Year Rate</a></li>
                     </ul>
+                    <div sec:authorize="hasAuthority('ADMIN')">
+                        <a class="btn btn-success" th:href="@{/currency/{currencyId}/edit(currencyId=${currency.id})}">Edit</a>
+                    </div>
                 </div>
             </div>
         </div>

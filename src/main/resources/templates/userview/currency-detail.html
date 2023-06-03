@@ -27,12 +27,13 @@
           <div class="card mb-4">
             <a href="#!"><img class="card-img-top" th:src="${currency.url}" alt="..." /></a>
             <div class="card-body">
-              <div class="small text-muted" th:text="${currency.country}"></div>
-              <h2 class="card-title">Country</h2>
+              <h2 class="card-title"th:text="${currency.title}">Title</h2>
+              <p class="card-text"th:text="${'Country: '+currency.country}"></p>
               <p class="card-text" th:text="${'Currency symbol: '+currency.symbol}"></p>
+              <p class="card-text" th:text="${'Currency information: '+currency.details}"></p>
               <div sec:authorize="hasAuthority('ADMIN')">
                  <a class="btn btn-primary" th:href="@{/currency/{currencyId}/delete(currencyId=${currency.id})}">Delete</a>
-                <a class="btn btn-primary" th:href="@{/rate/{currencyId}/new(currencyId=${currencyId})}">Add new date</a>
+                <a class="btn btn-success" th:href="@{/rate/{currencyId}/new(currencyId=${currencyId})}">Add new date</a>
               </div>
             </div>
             </div>

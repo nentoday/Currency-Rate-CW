@@ -45,13 +45,13 @@ public class ExchangeRateController {
 
         List<Date> exchangeRates = dateService.findExchangeRate(currencyId, startDate, endDate);
         model.addAttribute("exchangeRates", exchangeRates);
-        return "exchange-rate";
+        return "userview/exchange-rate";
     }
     @GetMapping("/currency/{currencyId}/exchange-rate/today")
     public String viewExchangeRateForCurrentDay(@PathVariable("currencyId") Long currencyId, Model model) {
         LocalDate rateDate = LocalDate.now();
         List<Date> exchangeRates= dateService.findById(rateDate,currencyId);
         model.addAttribute("exchangeRates", exchangeRates);
-        return "exchange-rate";
+        return "userview/exchange-rate";
     }
 }

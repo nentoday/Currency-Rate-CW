@@ -3,18 +3,17 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorate="~{layout}">
 <head>
-    <title>Edit</title>
+    <title>Create</title>
 </head>
 <body class="d-flex flex-column h-100">
 <main class="flex-shrink-0">
     <!-- Page Content-->
     <section layout:fragment="body" class="py-5">
-        <form role="form" method="post" th:action="@{/currency/{currencyId}/edit(currencyId=${currency.id})}" th:object="${currency}">
-            <input type="hidden" th:field="*{id}">
+        <form role="form" method="post" th:action="@{/currency/new}" th:object="${currency}">
 
             <div class="container">
-                <div class="form-row">
-                    <div class="form-group col-md6">
+                    <div class="form-row">
+                    <div class="form-group col-md-6">
                         <label for="title">Add Currency</label>
                         <input
                                 type="text"
@@ -59,10 +58,20 @@
                                 name="symbol"
                                 th:field="*{symbol}"
                                 placeholder="Insert Currency symbol">
-                        <p th:if="${#fields.hasErrors('symbol')}" class="text-danger" th:errors="*{symbol}"></p>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
+                        <div class="form-group col-md-6">
+                            <label for="details">Currency detail</label>
+                            <textarea
+                                    class="form-control"
+                                    id="details"
+                                    name="details"
+                                    th:field="*{details}"
+                                    placeholder="Insert Currency details"
+                                    rows="6"></textarea>
+                            <p th:if="${#fields.hasErrors('details')}" class="text-danger" th:errors="*{details}"></p>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
             </div>
         </form>
     </section>

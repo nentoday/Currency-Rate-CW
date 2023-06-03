@@ -17,14 +17,14 @@ public class AuthController {
 
     @GetMapping("/login")
     public String loginPage(Model model){
-        return "login";
+        return "authentification/login";
     }
 
     @GetMapping("/register")
     public String getRegistration(Model model) {
         UserEntity user = new UserEntity();
         model.addAttribute("user", user);
-        return "register";
+        return "authentification/register";
     }
 
     @PostMapping("/register/save")
@@ -42,7 +42,7 @@ public class AuthController {
 
         if (result.hasErrors()) {
             model.addAttribute("user", user);
-            return "register";
+            return "authentification/register";
         }
         userService.saveUser(user);
 

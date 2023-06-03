@@ -28,6 +28,7 @@ public class Currency {
    private String url;
    private String country;
    private String symbol;
+   private String details;
    @UpdateTimestamp
    private LocalDateTime updatedOn;
 

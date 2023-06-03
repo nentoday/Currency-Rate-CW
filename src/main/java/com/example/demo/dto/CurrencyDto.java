@@ -21,6 +21,7 @@ public class CurrencyDto {
     private String title;
     @NotEmpty(message ="enter the url")
     private String url;
+    private String details;
     @NotEmpty(message ="enter the country")
     private String country;
     @NotEmpty(message ="enter the currency symbol")
