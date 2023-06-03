@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -51,6 +52,20 @@ public class CurrencyController {
         } catch (DataNotFoundException e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
+        return "userview/currencies-list";
+    }
+    @GetMapping("/currency/sort")
+    public String getCurrencies(@RequestParam(value = "title", required = false) String title, Model model) {
+        List<Currency> currencies = null;
+        switch (title) {
+            case "name":
+                currencies = currencyService.sortByTitle(title);
+                break;
+            case "country":
+                currencies = currencyService.sortByCountry(title);
+                break;
+        }
+        model.addAttribute("currencies", currencies);
         return "userview/currencies-list";
     }
 

@@ -26,7 +26,20 @@
                 <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
                     <p th:text="${errorMessage}"></p>
                 </div>
-                <div th:each="currency:${currencies}" class="col-lg-6 mb-2">
+                <div sec:authorize="hasAnyAuthority('ADMIN','USER')">
+                <div class="row gx-5 mb-3">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="sort" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sort by
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="sort">
+                            <li><a class="dropdown-item" th:href="@{/currency/sort(title='name')}">Currency Name</a></li>
+                            <li><a class="dropdown-item" th:href="@{/currency/sort(title='country')}">Currency Country</a></li>
+                        </ul>
+                    </div>
+                </div>
+                </div>
+                    <div th:each="currency:${currencies}" class="col-lg-6 mb-2">
                     <div class="position-relative mb-3">
                         <img class="img-fluid rounded-3 mb-3" th:src="${currency.url}" alt="..." />
                         <div class="d-flex flex-column">
@@ -50,4 +63,5 @@
     </section>
 </main>
 </body>
+
 </html>

@@ -2,6 +2,7 @@ package com.example.demo.services.impl;
 
 import com.example.demo.exceptions.DataNotFoundException;
 import com.example.demo.dto.CurrencyDto;
+import com.example.demo.model.Date;
 import com.example.demo.repository.CurrencyRepository;
 import com.example.demo.services.CurrencyService;
 import com.example.demo.model.Currency;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,6 +63,24 @@ public class Currencyserviceimpl implements CurrencyService {
         return currencies.stream()
                 .map(currency -> mapToCurrencyDto(currency))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Currency> sortByTitle(String title) {
+        List <Currency> currencies = currencyRepository.findAll();
+        List<Currency> sortedList = currencies.stream()
+                .sorted(Comparator.comparing(Currency::getTitle))
+                .collect(Collectors.toList());
+        return sortedList;
+    }
+
+    @Override
+    public List<Currency> sortByCountry(String title) {
+        List <Currency> currencies = currencyRepository.findAll();
+        List<Currency> sortedList = currencies.stream()
+                .sorted(Comparator.comparing(Currency::getCountry))
+                .collect(Collectors.toList());
+        return sortedList;
     }
 
 }

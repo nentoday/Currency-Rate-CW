@@ -16,4 +16,8 @@ public interface CurrencyService {
 
     void delete(Long currencyId);
     List<CurrencyDto> searchCurrency(String query);
+
+    List<Currency> sortByTitle(String title);
+
+    List<Currency> sortByCountry(String title);
 }
