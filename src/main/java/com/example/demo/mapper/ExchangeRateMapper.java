@@ -1,11 +1,11 @@
 package com.example.demo.mapper;
 
-import com.example.demo.dto.DateDto;
-import com.example.demo.model.Date;
+import com.example.demo.dto.ExchangeRateDto;
+import com.example.demo.model.ExchangeRate;
 
-public class DateMapper {
-    public static Date mapToDate(DateDto dateDto){
-        return Date.builder()
+public class ExchangeRateMapper {
+    public static ExchangeRate mapToDate(ExchangeRateDto dateDto){
+        return ExchangeRate.builder()
                 .dateId(dateDto.getDateId())
                 .rate(dateDto.getRate())
                 .rateDate(dateDto.getRateDate())
@@ -13,8 +13,8 @@ public class DateMapper {
                 .currency(dateDto.getCurrency())
                 .build();
     }
-    public static DateDto mapToDateDto(Date date){
-        return DateDto.builder()
+    public static ExchangeRateDto mapToDateDto(ExchangeRate date){
+        return ExchangeRateDto.builder()
                 .dateId(date.getDateId())
                 .rate(date.getRate())
                 .rateDate(date.getRateDate())

@@ -13,13 +13,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 @Data
 @Builder
-public class DateDto {
+public class ExchangeRateDto {
     private Long dateId;
     @Min(value = 0, message = "The rate must be a positive number")
     private float rate;
     @NotNull(message = "Rate date is required")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @PastOrPresent(message = "Date must be today or in the past")
+    @PastOrPresent(message = "ExchangeRate must be today or in the past")
     private LocalDate rateDate;
     private LocalDateTime createdOn;
     private Currency currency;

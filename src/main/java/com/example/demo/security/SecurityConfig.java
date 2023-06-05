@@ -23,11 +23,10 @@ public class SecurityConfig{
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.csrf().disable()
                 .authorizeHttpRequests()
+                .requestMatchers("/currency/sort", "/currency/{currencyId}").hasAnyAuthority("ADMIN","USER")
                 .requestMatchers("/currency/{currencyId}/delete", "/currency/{currencyId}/edit","/currency?success",
                         "/currency/new","/rate/{dateId}/delete","/rate/{dateId}/edit","/rate/{currencyId}/new","/rate/{currencyId}").hasAuthority("ADMIN")
-                .requestMatchers("/currency/sort").hasAnyAuthority("ADMIN","USER")
-                .requestMatchers("/login", "/register", "/currency/{currencyId}", "/currency", "/search","/currency?success",
-                        "/currency/{currencyId}/exchange-rate/week","/currency/{currencyId}/exchange-rate/month","/currency/{currencyId}/exchange-rate/year",
+                .requestMatchers("/login", "/register", "/currency", "/currency/search**","/currency?success",
                         "/currency/{currencyId}/exchange-rate/today","/currency/{currencyId}/exchange-rate","/register/**", "/css/**", "/js/**")
                 .permitAll()
                 .and()

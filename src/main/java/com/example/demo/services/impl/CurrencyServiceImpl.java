@@ -2,7 +2,6 @@ package com.example.demo.services.impl;
 
 import com.example.demo.exceptions.DataNotFoundException;
 import com.example.demo.dto.CurrencyDto;
-import com.example.demo.model.Date;
 import com.example.demo.repository.CurrencyRepository;
 import com.example.demo.services.CurrencyService;
 import com.example.demo.model.Currency;
@@ -18,10 +17,10 @@ import static com.example.demo.mapper.CurrencyMapper.mapToCurrency;
 import static com.example.demo.mapper.CurrencyMapper.mapToCurrencyDto;
 
 @Service
-public class Currencyserviceimpl implements CurrencyService {
+public class CurrencyServiceImpl implements CurrencyService {
     private CurrencyRepository currencyRepository;
     @Autowired
-    public Currencyserviceimpl(CurrencyRepository currencyRepository) {
+    public CurrencyServiceImpl(CurrencyRepository currencyRepository) {
         this.currencyRepository = currencyRepository;
     }
 

@@ -33,8 +33,6 @@ public class Currency {
    private LocalDateTime updatedOn;
 
    @OneToMany(mappedBy = "currency", cascade = CascadeType.REMOVE)
-   private List<Date> date = new ArrayList<>();
+   private List<ExchangeRate> date = new ArrayList<>();
 
-   @OneToMany(mappedBy = "currency", cascade = CascadeType.REMOVE)
-   private List<ExchangeRate> rates=new ArrayList<>();
 }

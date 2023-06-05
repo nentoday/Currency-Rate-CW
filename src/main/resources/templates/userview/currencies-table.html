@@ -1,0 +1,80 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}" xmlns:sec="http://www.thymeleaf.org/">
+<head>
+  <title>Currency Rate</title>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+  <section layout:fragment="body" class="py-5">
+    <div class="container px-5 my-5">
+      <div class="text-center mb-5">
+        <h1 class="fw-bolder">Find your currency rate</h1>
+        <p class="lead fw-normal text-muted mb-0">Travel because money returns, time doesn’t</p>
+      </div>
+      <div class="row gx-5">
+        <form th:action="@{/currency/search}" class="form-inline my-2 my-lg-4 md-3">
+          <div class="input-group">
+            <input name="query" class="form-control my-2 my-lg-0 md-3" type="search" placeholder="Search currency" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </div>
+        </form>
+        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+          <p th:text="${errorMessage}"></p>
+        </div>
+        <div sec:authorize="hasAnyAuthority('ADMIN','USER')">
+          <div class="row gx-5 mb-3">
+            <div class="dropdown">
+              <button class="btn btn-success dropdown-toggle" type="button" id="sort" data-bs-toggle="dropdown" aria-expanded="false">
+                Sort by
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="sort">
+                <li><a class="dropdown-item" th:href="@{/currency/sort(title='name')}">Currency Name</a></li>
+                <li><a class="dropdown-item" th:href="@{/currency/sort(title='country')}">Currency Country</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Currency</th>
+            <th>Country</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="currency : ${currencies}">
+            <td>
+              <a th:text="${currency.symbol+' '+currency.title}" class="h3 fw-bolder text-decoration-none link-dark" href="#!">Currency Name</a>
+            </td>
+            <td>
+              <a th:text="${currency.country}" class="h6 text-decoration-none link-dark"></a>
+            </td>
+            <td>
+              <div class="d-flex flex-row">
+                <div sec:authorize="hasAnyAuthority('ADMIN','USER')">
+                  <a class="btn btn-secondary p-2" th:href="@{/currency/{currencyId}(currencyId=${currency.id})}">View</a>
+                </div>
+                <div sec:authorize="hasAuthority('ADMIN')">
+                  <a class="btn btn-success p-2" th:href="@{/currency/{currencyId}/edit(currencyId=${currency.id})}">Edit</a>
+                </div>
+                <a class="btn btn-primary p-2" th:href="@{/currency/{currencyId}/exchange-rate?period=today(currencyId=${currency.id})}">Today Rate</a>
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle p-2" type="button" id="navbarDropdownPortfolio" data-bs-toggle="dropdown" aria-expanded="false">Period Rate</button>
+                  <ul class="dropdown-menu dropdown-menu-end p-2" aria-labelledby="navbarDropdownPortfolio">
+                    <li><a class="dropdown-item" th:href="@{/currency/{currencyId}/exchange-rate?period=week(currencyId=${currency.id})}">Week Rate</a></li>
+                    <li><a class="dropdown-item" th:href="@{/currency/{currencyId}/exchange-rate?period=month(currencyId=${currency.id})}">Month Rate</a></li>
+                    <li><a class="dropdown-item" th:href="@{/currency/{currencyId}/exchange-rate?period=year(currencyId=${currency.id})}">Year Rate</a></li>
+                  </ul>
+                </div>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>
+

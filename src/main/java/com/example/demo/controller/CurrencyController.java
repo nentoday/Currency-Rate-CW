@@ -3,9 +3,9 @@ package com.example.demo.controller;
 import com.example.demo.exceptions.DataNotFoundException;
 import com.example.demo.dto.CurrencyDto;
 import com.example.demo.model.Currency;
-import com.example.demo.model.Date;
+import com.example.demo.model.ExchangeRate;
 import com.example.demo.services.CurrencyService;
-import com.example.demo.services.DateService;
+import com.example.demo.services.ExchangeRateService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,18 +13,17 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class CurrencyController {
     private CurrencyService currencyService;
-    private DateService dateService;
+    private ExchangeRateService exchangeRateService;
     @Autowired
 
-    public CurrencyController(CurrencyService currencyService, DateService dateService) {
+    public CurrencyController(CurrencyService currencyService, ExchangeRateService exchangeRateService) {
         this.currencyService = currencyService;
-        this.dateService =dateService;
+        this.exchangeRateService = exchangeRateService;
     }
   //User
     @GetMapping("/currency")
@@ -33,11 +32,17 @@ public class CurrencyController {
         model.addAttribute("currencies",currencies);
         return "userview/currencies-list";
     }
+    @GetMapping("/currency/table")
+    public String tableCurrencies(Model model){
+        List<CurrencyDto> currencies=currencyService.findAllCurrencies();
+        model.addAttribute("currencies",currencies);
+        return "userview/currencies-table";
+    }
 
     @GetMapping("/currency/{currencyId}")
     public String currencyDetail(@PathVariable("currencyId") Long currencyId, Model model){
         CurrencyDto currencyDto = currencyService.findByCurrencyId(currencyId);
-        List<Date> exchangeRate = dateService.findAllDates(currencyId);
+        List<ExchangeRate> exchangeRate = exchangeRateService.findAllDates(currencyId);
         model.addAttribute("exchangeRate",exchangeRate);
         model.addAttribute("currency", currencyDto);
         return "userview/currency-detail";

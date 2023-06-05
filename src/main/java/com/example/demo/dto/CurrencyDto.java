@@ -1,14 +1,10 @@
 package com.example.demo.dto;
 
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Past;
 import lombok.Builder;
 import lombok.Data;
-import org.hibernate.annotations.UpdateTimestamp;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -27,6 +23,6 @@ public class CurrencyDto {
     @NotEmpty(message ="enter the currency symbol")
     private String symbol;
     private LocalDateTime updatedOn;
-    private List<DateDto> dates;
+    private List<ExchangeRateDto> dates;
 
 }

@@ -5,7 +5,7 @@ import com.example.demo.model.Currency;
 
 import java.util.stream.Collectors;
 
-import static com.example.demo.mapper.DateMapper.mapToDateDto;
+import static com.example.demo.mapper.ExchangeRateMapper.mapToDateDto;
 
 public class CurrencyMapper {
 
